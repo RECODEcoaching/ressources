@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ressources RECODE</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>
+/* =====================================================================
+   1) RÉGLAGE UNIQUE — l'URL de ton Google Apps Script (voir guide)
+   ===================================================================== */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwh4hwipDSB4-ShctAEYrkMyjtRszcsF3Bp2J43EEj9pia42Vd5uD1P-5AYiwJ5hU-k/exec";
+
+/* =====================================================================
+   2) TES RESSOURCES — une entrée par épisode / ressource.
+   Le lien à partager : https://TON-SITE/?r=IDENTIFIANT
+   (ex. ?r=collagene). Ajoute &s=podcast ou &s=insta pour savoir
+   d'où vient la personne.
+   ===================================================================== */
+const RESOURCES = {
+  collagene: {
+    titre: "Le collagène",
+    type: "Fiche synthèse · Podcast RECODE Femme",
+    accroche: "Ni arnaque, ni produit miracle. Ce qui tient, ce qui reste à prouver.",
+    points: [
+      "Bovin ou marin : ce qui change vraiment",
+      "Pourquoi beaucoup de produits en pharmacie ne servent à rien",
+      "Les objections passées au crible, études à l'appui",
+      "Comment tester intelligemment, et quoi regarder si tu as mal"
+    ],
+    format: "PDF · 4 pages",
+    lien: "https://drive.google.com/file/d/1AvLo8Yv6tBEAhq_pX4Pxyk6Ijnw5p-lX/view?usp=sharing"
+  }
+  /* , autre_episode: { titre: "...", type: "...", accroche: "...", points: ["..."], format: "PDF · X pages", lien: "..." } */
+};
+</script>
+<style>
+  :root{--v:#6D28D9;--v2:#8B5CF6;--v-dark:#4C1D95;--v-soft:#EDE5FC;--v-line:#D6C6F6;--ink:#111827;--ink2:#374151;--muted:#6B7280;--bg:#F4F2F8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink2);line-height:1.55;min-height:100vh}
+  .hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#1b1430 0%,#111827 100%);color:#fff;padding:22px 20px 70px}
+  .hero::before{content:"";position:absolute;width:420px;height:420px;right:-140px;top:-170px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.55),transparent 70%)}
+  .hero .in{position:relative;z-index:1;max-width:560px;margin:0 auto}
+  .top{display:flex;justify-content:space-between;align-items:flex-start}
+  .brand{font-weight:900;letter-spacing:.34em;font-size:14px;padding-top:6px}
+  .logo{height:96px;width:auto;opacity:.95}
+  .kick{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#C4B5FD;margin:14px 0 8px}
+  h1{font-size:40px;line-height:1.02;font-weight:900;letter-spacing:-.03em}
+  h1 em{font-style:normal;color:#A78BFA}
+  .acc{color:#D1D5DB;font-size:15px;margin-top:10px;max-width:440px}
+  .fmt{display:inline-block;margin-top:14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 12px;color:#E9E3FF}
+
+  main{max-width:560px;margin:-46px auto 0;padding:0 16px 40px;position:relative;z-index:2}
+  .card{background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(76,29,149,.14),0 2px 6px rgba(76,29,149,.08);padding:22px 20px}
+  .lbl{font-size:10.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--v);margin-bottom:10px}
+  ul.pts{list-style:none;margin-bottom:18px}
+  ul.pts li{position:relative;padding:6px 0 6px 26px;font-size:14.5px;color:var(--ink2);border-bottom:1px dashed var(--v-line)}
+  ul.pts li:last-child{border-bottom:0}
+  ul.pts li::before{content:"";position:absolute;left:0;top:11px;width:14px;height:14px;border-radius:4px;background:var(--v-soft);box-shadow:inset 0 0 0 2px var(--v)}
+  label{display:block;font-size:12.5px;font-weight:700;color:var(--ink);margin:12px 0 5px}
+  label span{font-weight:500;color:var(--muted)}
+  input[type=text],input[type=email]{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid var(--v-line);border-radius:10px;background:#FBFAFE;color:var(--ink);outline:none;transition:border-color .15s}
+  input:focus{border-color:var(--v);background:#fff}
+  .consent{display:flex;gap:10px;align-items:flex-start;margin:16px 0 4px;font-size:12px;color:var(--muted);line-height:1.45}
+  label.consent{font-weight:500}
+  .consent input{margin-top:2px;width:16px;height:16px;accent-color:var(--v);flex:none}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  button{width:100%;margin-top:16px;font:inherit;font-weight:800;font-size:15.5px;color:#fff;background:linear-gradient(90deg,var(--v),var(--v2));border:0;border-radius:12px;padding:15px;cursor:pointer;box-shadow:0 6px 18px rgba(109,40,217,.35)}
+  button:disabled{opacity:.6;cursor:wait}
+  .err{color:#B91C1C;font-size:13px;margin-top:10px;min-height:18px}
+  .small{font-size:11.5px;color:var(--muted);text-align:center;margin-top:12px}
+
+  .done{text-align:center}
+  .done h2{font-size:24px;font-weight:900;color:var(--ink);letter-spacing:-.02em;margin-bottom:6px}
+  .done p{font-size:14.5px;margin-bottom:6px}
+  .dl{display:block;text-decoration:none;margin-top:16px;font-weight:800;font-size:16px;color:#fff;background:linear-gradient(90deg,var(--v),var(--v2));border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(109,40,217,.35)}
+  .links{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+  .links a{display:block;text-decoration:none;border:1px solid var(--v-line);border-radius:10px;padding:11px;color:var(--ink);font-weight:800;font-size:13px;text-align:left}
+  .links a span{display:block;font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--v)}
+  .hidden{display:none}
+  footer{text-align:center;font-size:11.5px;color:var(--muted);padding:6px 0 26px}
+  footer b{color:var(--v);letter-spacing:.14em}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="in">
+    <div class="top">
+      <div class="brand">RECODE</div>
+      <img class="logo" src="logo-recode.png" alt="" onerror="this.style.display='none'">
+    </div>
+    <div class="kick" id="type">Ressource gratuite</div>
+    <h1 id="titre">Ressources RECODE</h1>
+    <p class="acc" id="accroche"></p>
+    <span class="fmt" id="format"></span>
+  </div>
+</header>
+
+<main>
+  <!-- FORMULAIRE -->
+  <div class="card" id="formCard">
+    <div class="lbl">Ce que tu vas y trouver</div>
+    <ul class="pts" id="points"></ul>
+
+    <div class="lbl" style="margin-top:4px">Reçois ta ressource</div>
+    <form id="f" novalidate>
+      <label for="prenom">Prénom</label>
+      <input type="text" id="prenom" name="prenom" autocomplete="given-name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" autocomplete="email" inputmode="email" required>
+
+      <label for="instagram">Instagram <span>(facultatif)</span></label>
+      <input type="text" id="instagram" name="instagram" placeholder="@toncompte" autocapitalize="off" autocorrect="off">
+
+      <div class="hp" aria-hidden="true"><label>Site web</label><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
+
+      <label class="consent"><input type="checkbox" id="consent" name="consent"> J'accepte de recevoir des emails de RECODE (conseils, nouvelles ressources). Désinscription possible à tout moment.</label>
+
+      <button type="submit" id="btn">Accéder à la ressource →</button>
+      <div class="err" id="err"></div>
+      <p class="small">Tes données restent chez RECODE. Jamais revendues.</p>
+    </form>
+  </div>
+
+  <!-- APRÈS ENVOI -->
+  <div class="card done hidden" id="doneCard">
+    <div class="lbl">C'est bon</div>
+    <h2 id="merci">Merci !</h2>
+    <p>Ta ressource est prête.</p>
+    <a class="dl" id="dl" href="#" target="_blank" rel="noopener">Ouvrir la fiche →</a>
+    <div class="links">
+      <a href="https://www.instagram.com/indianaafit/" target="_blank" rel="noopener"><span>Instagram</span>@indianaafit</a>
+      <a href="https://forms.fillout.com/t/5DrWA5Lz2Pus" target="_blank" rel="noopener"><span>Coaching</span>Me renseigner</a>
+    </div>
+  </div>
+
+  <!-- RESSOURCE INCONNUE -->
+  <div class="card hidden" id="nfCard">
+    <div class="lbl">Oups</div>
+    <p>Ce lien ne correspond à aucune ressource. Vérifie le lien ou retrouve toutes mes ressources sur Instagram.</p>
+    <a class="dl" href="https://www.instagram.com/indianaafit/">@indianaafit →</a>
+  </div>
+</main>
+
+<footer><b>RECODE</b> · @indianaafit</footer>
+
+<script>
+(function(){
+  const qs = new URLSearchParams(location.search);
+  const id = (qs.get('r') || '').toLowerCase().trim();
+  const source = qs.get('s') || '';
+  const R = RESOURCES[id];
+  const $ = s => document.getElementById(s);
+
+  if(!R){ $('formCard').classList.add('hidden'); $('nfCard').classList.remove('hidden'); return; }
+
+  document.title = R.titre + ' · RECODE';
+  $('type').textContent = R.type || 'Ressource gratuite';
+  const words = R.titre.split(' ');
+  $('titre').innerHTML = words.length > 1
+    ? esc(words.slice(0,-1).join(' ')) + ' <em>' + esc(words.slice(-1)[0]) + '</em>'
+    : '<em>' + esc(R.titre) + '</em>';
+  $('accroche').textContent = R.accroche || '';
+  if(R.format) $('format').textContent = R.format; else $('format').remove();
+  (R.points || []).forEach(p => { const li = document.createElement('li'); li.textContent = p; $('points').appendChild(li); });
+  $('dl').href = R.lien;
+
+  // Pré-remplissage si la personne est déjà venue
+  try{
+    const saved = JSON.parse(localStorage.getItem('recode_lead') || 'null');
+    if(saved){ $('prenom').value = saved.prenom || ''; $('email').value = saved.email || ''; $('instagram').value = saved.instagram || ''; }
+  }catch(e){}
+
+  $('f').addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    const prenom = $('prenom').value.trim();
+    const email = $('email').value.trim();
+    let insta = $('instagram').value.trim();
+    if(insta && insta[0] !== '@') insta = '@' + insta;
+    $('err').textContent = '';
+    if(!prenom){ $('err').textContent = 'Indique ton prénom.'; return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ $('err').textContent = 'Vérifie ton adresse email.'; return; }
+
+    const data = new URLSearchParams({
+      resource_id: id, resource_title: R.titre, prenom, email, instagram: insta,
+      consent: $('consent').checked ? 'oui' : 'non',
+      source, website: document.querySelector('input[name=website]').value,
+      page: location.href
+    });
+
+    $('btn').disabled = true; $('btn').textContent = 'Envoi…';
+    try{
+      await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', body:data });
+    }catch(e){ /* on n'empêche pas l'accès si l'envoi échoue */ }
+    try{ localStorage.setItem('recode_lead', JSON.stringify({prenom, email, instagram:insta})); }catch(e){}
+
+    $('merci').textContent = 'Merci ' + prenom + ' !';
+    $('formCard').classList.add('hidden');
+    $('doneCard').classList.remove('hidden');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  function esc(t){ const d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
+})();
+</script>
+</body>
+</html>
